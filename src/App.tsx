@@ -4,14 +4,16 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/main-page/main-page";
 import Footer from "./components/layout/footer";
 import NotFoundPage from "./pages/not-found/not-found";
+import MainHeader from "./components/layout/main-header";
 
 
 function App() {
   return (
     <Providers>
       <Router>
-        <div className="flex flex-col h-full">
-          <div className="flex-1">
+        <div className="flex flex-col min-h-full text-neutral-700 dark:text-neutral-200 bg-neutral-50 dark:bg-neutral-900">
+          <MainHeader/>
+          <div className="flex-1 container">
             <Routes>
               <Route
                 path={AppRoutes.MainPage}
