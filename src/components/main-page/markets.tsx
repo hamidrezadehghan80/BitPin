@@ -67,7 +67,7 @@ export default function Markets() {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col">
-        <h2 className="text-3xl font-medium">Markets Overview</h2>
+        <h2 className="md:text-3xl text-2xl font-medium">Markets Overview</h2>
         <p className="text-neutral-500 text-sm">
           Today's Cryptocurrency Prices
         </p>
@@ -78,9 +78,9 @@ export default function Markets() {
         onValueChange={(value) =>
           setMarketQuoteCurrency(value as MarketQuoteCurrencyType)
         }
-        className="mt-16"
+        className="md:mt-16 mt-8"
       >
-        <TabsList className="w-full max-w-52 relative text-sm md:text-base">
+        <TabsList className="w-full md:max-w-52 relative text-sm md:text-base">
           <TabsTrigger value="USDT" className="w-1/2">
             USDT
           </TabsTrigger>
