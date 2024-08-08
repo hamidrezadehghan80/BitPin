@@ -13,7 +13,7 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-full text-neutral-700 dark:text-neutral-200 bg-neutral-50 dark:bg-neutral-900">
           <MainHeader/>
-          <div className="flex-1 container">
+          <div className="flex-1 container px-6 md:px-8">
             <Routes>
               <Route
                 path={AppRoutes.MainPage}

@@ -18,7 +18,7 @@ export const formatCrypto = (amount: number | string | undefined) => {
 };
 
 export function getBigNumberAbbreviate(number: number, precision: number = 1) {
-  const abbr = ["M", "B", "T", "Quad", "Quint"];
+  const abbr = ["M", "B", "T", "Q"];
 
   let tier = (Math.log10(number) / 3) | 0;
 

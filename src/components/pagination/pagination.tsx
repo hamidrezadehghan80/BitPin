@@ -40,7 +40,7 @@ const Pagination = ({
   };
 
   return (
-    <div className="my-2 w-full">
+    <div className="my-2 w-full text-sm md:text-base">
       <div className="mx-auto flex h-full w-fit items-center justify-center rounded-md border p-1 dark:border-neutral-600">
         <button
           disabled={currentPage <= 1}

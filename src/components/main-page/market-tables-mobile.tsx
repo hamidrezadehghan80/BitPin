@@ -22,7 +22,7 @@ import { Skeleton } from "../ui/skeleton";
 import NotFoundCard from "../common/not-found-card";
 import useFavoriteMarketsStore from "../../libs/store/favorite-markets-store";
 
-export default function MarketsTable({
+export default function MarketsTableMobile({
   marketsList,
   isLoading,
 }: {
@@ -39,18 +39,15 @@ export default function MarketsTable({
         <TableHeader>
           <TableRow className="text-xs text-neutral-500">
             <TableHead>Name</TableHead>
-            <TableHead className="text-end">Price</TableHead>
-            <TableHead className="text-end">24h Change</TableHead>
-            <TableHead className="text-end">24h Volume</TableHead>
-            <TableHead className="text-end">Market Cap</TableHead>
-            <TableHead className="text-end">Actions</TableHead>
+            <TableHead className="text-end">Price/24h Change</TableHead>
+            <TableHead className="text-end">Vol/Cap</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {isLoading ? (
             <>
               {createArray(10).map((item) => (
-                <MarketsTableRowSkeleton key={item} />
+                <MarketsTableMobileRowSkeleton key={item} />
               ))}
             </>
           ) : (
@@ -60,7 +57,7 @@ export default function MarketsTable({
                   {marketsList
                     .slice(pageSize * (currentPage - 1), pageSize * currentPage)
                     .map((market) => (
-                      <MarketsTableRow market={market} key={market.id} />
+                      <MarketsTableMobileRow market={market} key={market.id} />
                     ))}
                 </>
               ) : (
@@ -89,16 +86,16 @@ export default function MarketsTable({
   );
 }
 
-const MarketsTableRow = ({ market }: { market: IMarket }) => {
+const MarketsTableMobileRow = ({ market }: { market: IMarket }) => {
   const { toggleFavorite, favoriteMarkets } = useFavoriteMarketsStore();
 
   return (
-    <TableRow className=" font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-800">
+    <TableRow className=" font-semibold hover:bg-neutral-100 text-xs dark:hover:bg-neutral-800 cursor-pointer">
       <TableCell className="font-semibold">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <button onClick={() => toggleFavorite(market.id)}>
             <Star
-              className={cn("size-[18px]", {
+              className={cn("size-4 md:size-[18px]", {
                 "text-primary-400": favoriteMarkets[market.id],
               })}
               weight={favoriteMarkets[market.id] ? "fill" : "regular"}
@@ -115,35 +112,36 @@ const MarketsTableRow = ({ market }: { market: IMarket }) => {
           <div className="flex flex-col">
             <p>
               {market.currency1.code}{" "}
-              <span className="text-neutral-500">{market.currency1.title}</span>
+             
             </p>
-            <p className="text-neutral-500 text-xs">{market.code.replace("_", "/")}</p>
+            <p className="text-neutral-500">{market.currency1.title}</p>
           </div>
         </div>
       </TableCell>
-      <TableCell className="text-end">{formatCurrency(market.price)}</TableCell>
       <TableCell className="text-end">
-        <DisplayPercent
-          number={market.price_info.change?.toString() || "0"}
-          nextText={"%"}
-        />
-      </TableCell>
-      <TableCell className="text-end font-semibold">
-        {getBigNumberAbbreviate(+market.volume_24h, 2)}
-      </TableCell>
-      <TableCell className="text-end">
-        {getBigNumberAbbreviate(+market.market_cap, 2)}
+        <div className="flex flex-col">
+          <p>{formatCurrency(market.price)}</p>
+          <DisplayPercent
+            number={market.price_info.change?.toString() || "0"}
+            nextText={"%"}
+            className="text-xs"
+          />
+        </div>
       </TableCell>
       <TableCell className="text-end">
-        <button>
-          <ChartBar className="size-6" weight="duotone" />
-        </button>
+        <div className="flex flex-col">
+          <p>{getBigNumberAbbreviate(+market.volume_24h, 2)}</p>
+          <p className="font-normal text-xs">
+            {" "}
+            {getBigNumberAbbreviate(+market.market_cap, 2)}
+          </p>
+        </div>
       </TableCell>
     </TableRow>
   );
 };
 
-const MarketsTableRowSkeleton = () => {
+const MarketsTableMobileRowSkeleton = () => {
   return (
     <TableRow>
       <TableCell>
