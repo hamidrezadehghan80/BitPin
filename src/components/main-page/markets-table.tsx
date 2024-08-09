@@ -21,6 +21,9 @@ import Pagination from "../pagination/pagination";
 import { Skeleton } from "../ui/skeleton";
 import NotFoundCard from "../common/not-found-card";
 import useFavoriteMarketsStore from "../../libs/store/favorite-markets-store";
+import { Button } from "../ui/button";
+import { Link, useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../libs/routes";
 
 export default function MarketsTable({
   marketsList,
@@ -92,8 +95,10 @@ export default function MarketsTable({
 const MarketsTableRow = ({ market }: { market: IMarket }) => {
   const { toggleFavorite, favoriteMarkets } = useFavoriteMarketsStore();
 
+  const navigate = useNavigate();
+
   return (
-    <TableRow className=" font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-800">
+    <TableRow className=" font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-800/60">
       <TableCell className="font-semibold">
         <div className="flex items-center gap-2">
           <button onClick={() => toggleFavorite(market.id)}>
@@ -117,7 +122,9 @@ const MarketsTableRow = ({ market }: { market: IMarket }) => {
               {market.currency1.code}{" "}
               <span className="text-neutral-500">{market.currency1.title}</span>
             </p>
-            <p className="text-neutral-500 text-xs">{market.code.replace("_", "/")}</p>
+            <p className="text-neutral-500 text-xs">
+              {market.code.replace("_", "/")}
+            </p>
           </div>
         </div>
       </TableCell>
@@ -135,9 +142,13 @@ const MarketsTableRow = ({ market }: { market: IMarket }) => {
         {getBigNumberAbbreviate(+market.market_cap, 2)}
       </TableCell>
       <TableCell className="text-end">
-        <button>
+        <Button
+          variant={"ghost"}
+          size={"sm"}
+          onClick={() => navigate(AppRoutes.Trade + "/" + market.id)}
+        >
           <ChartBar className="size-6" weight="duotone" />
-        </button>
+        </Button>
       </TableCell>
     </TableRow>
   );

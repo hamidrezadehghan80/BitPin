@@ -21,6 +21,8 @@ import Pagination from "../pagination/pagination";
 import { Skeleton } from "../ui/skeleton";
 import NotFoundCard from "../common/not-found-card";
 import useFavoriteMarketsStore from "../../libs/store/favorite-markets-store";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../libs/routes";
 
 export default function MarketsTableMobile({
   marketsList,
@@ -88,12 +90,19 @@ export default function MarketsTableMobile({
 
 const MarketsTableMobileRow = ({ market }: { market: IMarket }) => {
   const { toggleFavorite, favoriteMarkets } = useFavoriteMarketsStore();
+  const navigate = useNavigate();
 
   return (
-    <TableRow className=" font-semibold hover:bg-neutral-100 text-xs dark:hover:bg-neutral-800 cursor-pointer">
+    <TableRow
+      className="font-semibold hover:bg-neutral-100 text-xs dark:hover:bg-neutral-800/60 cursor-pointer"
+      onClick={() => navigate(AppRoutes.Trade + "/" + market.id)}
+    >
       <TableCell className="font-semibold">
         <div className="flex items-center gap-1">
-          <button onClick={() => toggleFavorite(market.id)}>
+          <button
+            className="hidden md:block"
+            onClick={() => toggleFavorite(market.id)}
+          >
             <Star
               className={cn("size-4 md:size-[18px]", {
                 "text-primary-400": favoriteMarkets[market.id],
@@ -110,10 +119,7 @@ const MarketsTableMobileRow = ({ market }: { market: IMarket }) => {
             src={market.currency1.image}
           />
           <div className="flex flex-col">
-            <p>
-              {market.currency1.code}{" "}
-             
-            </p>
+            <p>{market.currency1.code} </p>
             <p className="text-neutral-500">{market.currency1.title}</p>
           </div>
         </div>
@@ -144,7 +150,7 @@ const MarketsTableMobileRow = ({ market }: { market: IMarket }) => {
 const MarketsTableMobileRowSkeleton = () => {
   return (
     <TableRow>
-     <TableCell>
+      <TableCell>
         <Skeleton className="h-8 w-full max-w-52" />
       </TableCell>
       <TableCell>
@@ -154,6 +160,5 @@ const MarketsTableMobileRowSkeleton = () => {
         <Skeleton className="ms-auto h-8 w-full max-w-52" />
       </TableCell>
     </TableRow>
-   
   );
 };

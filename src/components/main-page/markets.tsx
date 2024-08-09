@@ -99,7 +99,7 @@ export default function Markets() {
         </TabsList>
 
         <div className="flex items-center justify-between gap-4 flex-wrap mt-8 mb-4 px-4">
-          <div className="flex items-center gap-2">
+          <div className="items-center gap-2 hidden md:flex">
             <Checkbox
               id="favorite-markets-checkbox"
               checked={isFavoriteMarketsChecked}
