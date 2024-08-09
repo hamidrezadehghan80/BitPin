@@ -57,7 +57,6 @@ export default function OrdersTable({
                 amount={order.remain}
                 price={order.price}
                 total={order.value}
-                remain={order.remain}
                 maxVolume={maxVolume}
                 type={type}
               />
@@ -79,14 +78,12 @@ const OrderItem = ({
   price,
   amount,
   total,
-  remain,
   maxVolume,
   type,
 }: {
   price: string;
   amount: string;
   total: string;
-  remain: string;
   maxVolume: number;
   type: "buy" | "sell";
 }) => {

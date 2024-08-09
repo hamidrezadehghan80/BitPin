@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { tradeHooks } from "../../libs/endpoints/trade/trade-endpoints";
 import OrderBook from "../../components/trade-page/orderbook/orderbook";
-
+import OrderForm from "../../components/trade-page/order-form/order-form";
 
 export default function TradePage() {
   const { id = "" } = useParams();
@@ -14,7 +14,8 @@ export default function TradePage() {
       </div>
 
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-       <OrderBook marketId={id}/>
+        <OrderBook marketId={id} />
+        <OrderForm marketId={id} />
       </div>
     </div>
   );
