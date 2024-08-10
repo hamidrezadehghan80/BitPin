@@ -14,7 +14,7 @@ const useTheme = create<IFavStore>()(
     devtools(
       persist(
         (set) => ({
-          theme : "light",
+          theme : "dark",
           setTheme: (theme) =>
             set(
               (state) => {

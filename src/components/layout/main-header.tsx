@@ -22,7 +22,7 @@ export default function MainHeader({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex items-center justify-between px-6 py-4 bg-neutral-100 dark:bg-neutral-800",
+        "flex items-center justify-between px-6 py-4 bg-neutral-200/70 dark:bg-neutral-800",
         className
       )}
     >

@@ -11,10 +11,14 @@ export default function OrdersTable({
   orders,
   type,
   isLoading,
+  baseCurrency,
+  quoteCurrency,
 }: {
   orders: IOrder[];
   type: OrderSideType;
   isLoading: boolean;
+  baseCurrency: string;
+  quoteCurrency: string;
 }) {
   const maxVolume = Math.max(...orders.map((order) => +order.remain));
 
@@ -39,11 +43,11 @@ export default function OrdersTable({
   }, [orders]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col">
       <div className="mt-2 flex items-center text-xs text-neutral-500 p-0.5">
-        <p className="flex-1">Price</p>
-        <p className="flex-1 text-start">Amount</p>
-        <p className="flex-1 text-end">Total</p>
+        <p className="flex-1">Price({quoteCurrency})</p>
+        <p className="flex-1 text-start">Amount({baseCurrency})</p>
+        <p className="flex-1 text-end">Total({quoteCurrency})</p>
       </div>
       <div className="flex flex-col">
         {isLoading ? (

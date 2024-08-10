@@ -25,7 +25,7 @@ const Slider = React.forwardRef<
       )}
       {...props}
     >
-      <SliderPrimitive.Track className="bg-neutral-100 dark:bg-neutral-800 relative h-2 w-full grow overflow-hidden rounded-full">
+      <SliderPrimitive.Track className="bg-neutral-200/70 dark:bg-neutral-800 relative h-2 w-full grow overflow-hidden rounded-full">
         <SliderPrimitive.Range
           className={`absolute h-full ${
             side === "sell" ? "bg-error-500 " : "bg-primary-400 "

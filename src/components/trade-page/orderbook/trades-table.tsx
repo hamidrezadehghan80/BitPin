@@ -9,15 +9,19 @@ import { Skeleton } from "../../ui/skeleton";
 export default function TradesTable({
   trades,
   isLoading,
+  baseCurrency,
+  quoteCurrency,
 }: {
   trades: ITrade[];
   isLoading: boolean;
+  baseCurrency: string;
+  quoteCurrency: string;
 }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="mt-2 flex items-center text-xs text-neutral-500 p-0.5">
-        <p className="w-1/3 text-ellipsis whitespace-nowrap">Price</p>
-        <p className="w-1/3 text-ellipsis whitespace-nowrap">Amount</p>
+        <p className="w-1/3 text-ellipsis whitespace-nowrap">Price({quoteCurrency})</p>
+        <p className="w-1/3 text-ellipsis whitespace-nowrap">Amount({baseCurrency})</p>
         <p className="w-1/3 pe-4 text-end">Time</p>
       </div>
       <div className="flex flex-col">

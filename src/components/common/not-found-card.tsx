@@ -1,4 +1,12 @@
-export default function NotFoundCard({ title }: { title?: string }) {
+import { cn } from "../../libs/utils";
+
+export default function NotFoundCard({
+  title,
+  className,
+}: {
+  title?: string;
+  className?: string;
+}) {
   return (
     <div className="flex w-full gap-1 py-6 items-center text-neutral-500 justify-center flex-col">
       <svg
@@ -16,7 +24,7 @@ export default function NotFoundCard({ title }: { title?: string }) {
         />
       </svg>
 
-      <span className="font-semibold text-base">
+      <span className={cn("font-semibold text-base", className)}>
         {title ?? "No data found!"}
       </span>
     </div>

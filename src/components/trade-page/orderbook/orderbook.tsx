@@ -12,7 +12,15 @@ import { OrderSideType } from "../../../libs/endpoints/trade/trade-schema";
 
 type OrderbookActiveTabType = "buy" | "sell" | "trade";
 
-export default function OrderBook({ marketId }: { marketId: string }) {
+export default function OrderBook({
+  marketId,
+  baseCurrency,
+  quoteCurrency,
+}: {
+  marketId: string;
+  baseCurrency: string;
+  quoteCurrency: string;
+}) {
   const [orderbookActiveTab, setOrderbookActiveTab] =
     useState<OrderbookActiveTabType>("buy");
 
@@ -50,7 +58,7 @@ export default function OrderBook({ marketId }: { marketId: string }) {
 
   return (
     <div className="flex flex-col gap-2">
-      <p className="font-semibold">OrderBook</p>
+      <p className="font-semibold">OrderBook & Trades</p>
       <Tabs
         value={orderbookActiveTab}
         onValueChange={(value) =>
@@ -83,6 +91,8 @@ export default function OrderBook({ marketId }: { marketId: string }) {
             orders={orders.slice(0, 10)}
             isLoading={OrdersIsLoading}
             type="buy"
+            baseCurrency={baseCurrency}
+            quoteCurrency={quoteCurrency}
           />
         </TabsContent>
         <TabsContent value="sell">
@@ -91,12 +101,16 @@ export default function OrderBook({ marketId }: { marketId: string }) {
             orders={orders.slice(0, 10)}
             isLoading={OrdersIsLoading}
             type="sell"
+            baseCurrency={baseCurrency}
+            quoteCurrency={quoteCurrency}
           />
         </TabsContent>
         <TabsContent value="trade">
           <TradesTable
             trades={trades.slice(0, 10)}
             isLoading={tradesIsLoading}
+            baseCurrency={baseCurrency}
+            quoteCurrency={quoteCurrency}
           />
         </TabsContent>
       </Tabs>

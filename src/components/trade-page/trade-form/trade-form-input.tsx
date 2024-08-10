@@ -18,7 +18,7 @@ const TradeFormInput = React.forwardRef<HTMLInputElement, IProps>(
     } = props;
 
     return (
-      <div className=" flex h-auto items-center justify-between gap-2 rounded-md bg-neutral-100 px-4 text-sm outline  outline-2 outline-transparent transition-colors focus-within:outline-primary-400 hover:outline-primary-400 rtl:[direction:rtl] dark:bg-neutral-800">
+      <div className=" flex h-auto items-center justify-between gap-2 rounded-md bg-neutral-200/70 px-4 text-sm outline  outline-2 outline-transparent transition-colors focus-within:outline-primary-400 hover:outline-primary-400 rtl:[direction:rtl] dark:bg-neutral-800 disabled:!outline-none">
         <label className="shrink-0">{startComponent}</label>
         <Input
           {...props}

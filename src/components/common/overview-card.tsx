@@ -8,18 +8,18 @@ export default function OverviewCard({
   isLoading,
 }: {
   title: string;
-  subTitle: string;
+  subTitle: ReactNode;
   icon: ReactNode;
   isLoading: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between  gap-4 rounded-full bg-neutral-200/70 p-3 px-6 text-xs dark:bg-black-3 md:rounded-md md:bg-neutral-100 md:p-4 md:px-4 md:text-sm lg:text-base">
-      <div className="flex flex-col gap-1 md:gap-2">
+    <div className="flex items-center justify-between  gap-4 bg-neutral-200/60 p-3 text-xs dark:bg-neutral-800 rounded-md md:text-sm">
+      <div className="flex flex-col gap-1">
         <p>{title}</p>
         {isLoading ? (
           <Skeleton className="h-7 w-20" />
         ) : (
-          <p className="font-bold md:text-base lg:text-lg">{subTitle}</p>
+          <p className="font-semibold">{subTitle}</p>
         )}
       </div>
       <span className="shrink-0">{icon}</span>
