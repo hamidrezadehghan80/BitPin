@@ -19,3 +19,5 @@ export const TradeSchema = z.object({
 });
 
 export type ITrade = z.infer<typeof TradeSchema>;
+
+export type OrderSideType = "buy" | "sell";

@@ -1,5 +1,8 @@
 import { format, fromUnixTime } from "date-fns";
-import { ITrade } from "../../../libs/endpoints/trade/trade-schema";
+import {
+  ITrade,
+  OrderSideType,
+} from "../../../libs/endpoints/trade/trade-schema";
 import { createArray } from "../../../libs/utils";
 import { Skeleton } from "../../ui/skeleton";
 
@@ -50,7 +53,7 @@ const TradeItem = ({
 }: {
   amount: string;
   price: string;
-  type: "buy" | "sell";
+  type: OrderSideType;
   time: number;
 }) => {
   return (

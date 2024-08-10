@@ -36,3 +36,61 @@ export function getBigNumberAbbreviate(number: number, precision: number = 1) {
 export function createArray(count: number): number[] {
   return Array.from({ length: count }, (_, index) => index + 1);
 }
+
+function faToEnNumbers(str: string): string {
+  const persianNumbers: RegExp[] = [
+    /۰/g,
+    /۱/g,
+    /۲/g,
+    /۳/g,
+    /۴/g,
+    /۵/g,
+    /۶/g,
+    /۷/g,
+    /۸/g,
+    /۹/g,
+  ];
+  if (typeof str === "string") {
+    for (let i = 0; i < 10; i++) {
+      str = str.replace(persianNumbers[i], i.toString());
+    }
+  }
+  return str;
+}
+
+export const numberInputSanitizer = (
+  event: React.ChangeEvent<HTMLInputElement>,
+  callback: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  precision?: number
+) => {
+
+  const value = faToEnNumbers(event.target.value);
+
+  if (value.length > 20 || value.split(".").length > 2) {
+    return;
+  }
+
+  const validChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+
+  for (const char of value) {
+    if (!validChars.includes(char)) {
+      return;
+    }
+  }
+
+  if (value === "00") {
+    return;
+  }
+
+  if (value.startsWith(".")) {
+    event.target.value = "0.";
+  }
+
+  const precisionCount: undefined | number = value.split(".")[1]?.length;
+
+  if (precision !== undefined && precisionCount && precisionCount > precision) {
+    event.target.value = value.slice(0, precision - precisionCount);
+  }
+
+  callback(event);
+};

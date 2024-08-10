@@ -8,6 +8,7 @@ import {
 import { tradeHooks } from "../../../libs/endpoints/trade/trade-endpoints";
 import OrdersTable from "./orders-table";
 import TradesTable from "./trades-table";
+import { OrderSideType } from "../../../libs/endpoints/trade/trade-schema";
 
 type OrderbookActiveTabType = "buy" | "sell" | "trade";
 
@@ -22,7 +23,7 @@ export default function OrderBook({ marketId }: { marketId: string }) {
           id: marketId,
         },
         queries: {
-          type: orderbookActiveTab as "buy" | "sell",
+          type: orderbookActiveTab as OrderSideType,
         },
       },
       {

@@ -1,5 +1,8 @@
 import { useMemo } from "react";
-import { IOrder } from "../../../libs/endpoints/trade/trade-schema";
+import {
+  IOrder,
+  OrderSideType,
+} from "../../../libs/endpoints/trade/trade-schema";
 import { divide, roundUp, sum, times } from "../../../libs/math";
 import { cn, createArray } from "../../../libs/utils";
 import { Skeleton } from "../../ui/skeleton";
@@ -10,7 +13,7 @@ export default function OrdersTable({
   isLoading,
 }: {
   orders: IOrder[];
-  type: "buy" | "sell";
+  type: OrderSideType;
   isLoading: boolean;
 }) {
   const maxVolume = Math.max(...orders.map((order) => +order.remain));
@@ -66,7 +69,7 @@ export default function OrdersTable({
       </div>
 
       <div className="mt-2 flex items-center text-sm text-neutral-500 p-0.5 border-t dark:border-neutral-700">
-        <p className="flex-1">{roundUp(avgPrice, 2) }</p>
+        <p className="flex-1">{roundUp(avgPrice, 2)}</p>
         <p className="flex-1 text-start">{totalRemain}</p>
         <p className="flex-1 text-end">{totalValue}</p>
       </div>
@@ -85,7 +88,7 @@ const OrderItem = ({
   amount: string;
   total: string;
   maxVolume: number;
-  type: "buy" | "sell";
+  type: OrderSideType;
 }) => {
   return (
     <div className="relative flex w-full items-center justify-between p-0.5 text-sm">

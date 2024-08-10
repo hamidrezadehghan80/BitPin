@@ -1,10 +1,15 @@
 import { useParams } from "react-router-dom";
 import { tradeHooks } from "../../libs/endpoints/trade/trade-endpoints";
 import OrderBook from "../../components/trade-page/orderbook/orderbook";
-import OrderForm from "../../components/trade-page/order-form/order-form";
+import TradeForm from "../../components/trade-page/trade-form/trade-form";
+import { marketsHooks } from "../../libs/endpoints/markets/markets-endpoints";
 
 export default function TradePage() {
   const { id = "" } = useParams();
+
+  const { data, isLoading } = marketsHooks.useQueryAllMarkets();
+  const marketsList = data?.results || [];
+  const market = marketsList.find((market) => market.id === +id);
 
   return (
     <div className="flex flex-col mt-16 gap-4">
@@ -15,7 +20,7 @@ export default function TradePage() {
 
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         <OrderBook marketId={id} />
-        <OrderForm marketId={id} />
+        <TradeForm marketId={id} />
       </div>
     </div>
   );
