@@ -62,12 +62,7 @@ export default function Markets() {
       }
       return true;
     });
-  }, [
-    marketQuoteCurrency,
-    marketsList,
-    debouncedMarketsQuery,
-    isFavoriteMarketsChecked,
-  ]);
+  }, [marketsList, marketQuoteCurrency, debouncedMarketsQuery, isFavoriteMarketsChecked, favoriteMarkets]);
 
   const { isDesktop } = useWindowSize();
 
