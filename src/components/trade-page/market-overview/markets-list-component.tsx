@@ -49,7 +49,7 @@ export default function MarketsListComponent({
 
       return true;
     });
-  }, [markets, activeMarketQuote, debouncedMarketsQuery]);
+  }, [markets, activeMarketQuote, favoriteMarkets, debouncedMarketsQuery]);
 
   const navigate = useNavigate();
 

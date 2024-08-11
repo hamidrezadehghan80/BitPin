@@ -32,6 +32,8 @@ export default function TradePage() {
         />
         <TradeForm
           marketId={id}
+          baseCurrency={market?.currency1.code || ""}
+          quoteCurrency={market?.currency2.code || ""}
         />
       </div>
     </div>

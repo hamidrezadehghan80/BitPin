@@ -59,7 +59,7 @@ export default function QuickPercentSlider({
         }
 
         return (
-          <div
+          <button
             key={num}
             onClick={() =>
               setPercent(
@@ -67,7 +67,7 @@ export default function QuickPercentSlider({
               )
             }
             className={`${
-              percent <= length * (num / (pointCount - 1))
+              percent < length * (num / (pointCount - 1))
                 ? " bg-neutral-50 dark:border-neutral-600 dark:bg-neutral-800"
                 : ` ${
                     side === "sell" ? "!bg-error-500" : "!bg-primary-400"

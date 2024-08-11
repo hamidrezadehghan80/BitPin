@@ -15,7 +15,15 @@ import BuySellToggle from "./buy-sell-toggle";
 import TradeFormInput from "./trade-form-input";
 import QuickPercentSlider from "./quick-percent-slider";
 
-export default function TradeForm({ marketId }: { marketId: string }) {
+export default function TradeForm({
+  marketId,
+  baseCurrency,
+  quoteCurrency,
+}: {
+  marketId: string;
+  baseCurrency: string;
+  quoteCurrency: string;
+}) {
   const [activeSide, setActiveSide] = useState<OrderSideType>("buy");
 
   const { data: ordersData, isLoading: OrdersIsLoading } =
@@ -25,7 +33,7 @@ export default function TradeForm({ marketId }: { marketId: string }) {
           id: marketId,
         },
         queries: {
-          type: activeSide,
+          type: activeSide === "buy" ? "sell" : "buy",
         },
       },
       {
@@ -86,7 +94,7 @@ export default function TradeForm({ marketId }: { marketId: string }) {
         <div className="flex items-center gap-2 text-xs">
           <p className="text-neutral-500">Avbl</p>
           <p>
-            {totalRemain} <span>BTC</span>
+            {totalRemain} <span>{baseCurrency}</span>
           </p>
         </div>
         <TradeFormInput
@@ -114,25 +122,25 @@ export default function TradeForm({ marketId }: { marketId: string }) {
           startComponent={"Price"}
           maxPrecision={2}
           disabled
-          endComponent={"USDT"}
+          endComponent={quoteCurrency}
           name="price"
-          value={roundUp(avgPrice, 2)}
+          value={roundUp(avgPrice, quoteCurrency === "IRT" ? 0 : 2)}
         />
 
         <TradeFormInput
           startComponent={"Total"}
           maxPrecision={2}
           disabled
-          endComponent={"USDT"}
+          endComponent={quoteCurrency}
           name="total"
-          value={roundUp(accumulatedValue, 2) }
+          value={roundUp(accumulatedValue, quoteCurrency === "IRT" ? 0 : 2)}
         />
 
         <TradeFormInput
           startComponent={"Amount"}
           maxPrecision={8}
           disabled
-          endComponent={"BTC"}
+          endComponent={baseCurrency}
           name="total"
           value={roundUp(rateRemain, 8)}
         />
